@@ -9,7 +9,7 @@ dotenv.config();
 
 // Connect to database
 connectDB();
-
+dotenv.config();
 const app = express();
 
 // Middleware: CORS should be set **before** routes
