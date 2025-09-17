@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
 
+
 // Load environment variables first
 dotenv.config();
 
@@ -16,7 +17,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    'simple-expense-tracker-23kij066g-kushs-projects-1c4830b0.vercel.app',   // Your frontend URL on Render or Vercel
+    'https://simple-expense-tracker-qvgo.onrender.com',   // Your frontend URL on Render or Vercel
     'http://localhost:5173'                                 // For local development
   ],
   credentials: true
