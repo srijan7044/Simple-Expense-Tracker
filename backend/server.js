@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
+
 // Load environment variables first
 dotenv.config();
 
@@ -12,11 +13,10 @@ connectDB();
 const app = express();
 
 // Middleware: CORS should be set **before** routes
-const cors = require('cors');
 
 app.use(cors({
   origin: [
-    'https://simple-expense-tracker-qvgo.onrender.com',   // Your frontend URL on Render or Vercel
+    'simple-expense-tracker-23kij066g-kushs-projects-1c4830b0.vercel.app',   // Your frontend URL on Render or Vercel
     'http://localhost:5173'                                 // For local development
   ],
   credentials: true
