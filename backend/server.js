@@ -15,7 +15,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      'https://simple-expense-tracker-qvgo.onrender.com',
+      'https://simple-expense-tracker-smoky.vercel.app/',
       'http://localhost:5173'
     ],
     credentials: true
