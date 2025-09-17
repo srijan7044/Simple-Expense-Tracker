@@ -12,15 +12,16 @@ connectDB();
 const app = express();
 
 // Middleware: CORS should be set **before** routes
-app.use(
-  cors({
-    origin: [
-      'https://simple-expense-tracker-smoky.vercel.app/',
-      'http://localhost:5173'
-    ],
-    credentials: true
-  })
-);
+const cors = require('cors');
+
+app.use(cors({
+  origin: [
+    'https://simple-expense-tracker-qvgo.onrender.com',   // Your frontend URL on Render or Vercel
+    'http://localhost:5173'                                 // For local development
+  ],
+  credentials: true
+}));
+
 
 
 app.use(express.json());
