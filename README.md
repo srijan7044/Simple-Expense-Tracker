@@ -5,6 +5,7 @@ A simple Expense Tracker for daily life use with user auth.
 The file structure 
 
 **EXPENSE-FLOW/
+
 │── backend/                  # Node/Express backend
 
 │   ├── config/               # DB config
