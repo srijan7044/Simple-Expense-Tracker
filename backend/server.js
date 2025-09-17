@@ -17,6 +17,7 @@ const app = express();
 
 app.use(cors({
   origin: [
+    'https://simple-expense-tracker-3a09k6ljf-kushs-projects-1c4830b0.vercel.app/',
     'https://simple-expense-tracker-qvgo.onrender.com',   // Your frontend URL on Render or Vercel
     'http://localhost:5173'                                 // For local development
   ],
