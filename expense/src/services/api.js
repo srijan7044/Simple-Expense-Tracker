@@ -1,17 +1,18 @@
+// src/services/api.js
 import axios from 'axios';
 
-// Base API URL
-const API_BASE_URL = 'http://localhost:5000/api';
+// Base API URL (fallback to localhost for development)
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
-// Create axios instance
+// Create a single axios instance for all requests
 const api = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
 });
 
-// Add token to requests if available
+// Attach JWT token to every request if present in localStorage
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -20,26 +21,24 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
-// API Functions
+// Expense-related API functions
 export const expenseAPI = {
-  // Get all expenses
-  getExpenses: async (params = {}) => {
-    const response = await api.get('/expenses', { params });
+  // Fetch all expenses
+  getExpenses: async () => {
+    const response = await api.get('/expenses');
     return response.data;
   },
 
-  // Create new expense
+  // Create a new expense
   createExpense: async (expenseData) => {
     const response = await api.post('/expenses', expenseData);
     return response.data;
   },
 
-  // Delete expense
+  // Delete a single expense
   deleteExpense: async (id) => {
     const response = await api.delete(`/expenses/${id}`);
     return response.data;
@@ -47,37 +46,31 @@ export const expenseAPI = {
 
   // Delete multiple expenses
   deleteMultipleExpenses: async (expenseIds) => {
-    const response = await api.delete('/expenses/bulk', { data: { expenseIds } });
-    return response.data;
-  },
-
-  // Test health
-  getHealth: async () => {
-    const response = await api.get('/health');
+    const response = await api.delete('/expenses/bulk', {
+      data: { expenseIds }
+    });
     return response.data;
   }
 };
 
+// Authentication-related API functions
 export const authAPI = {
-  // Register new user
   register: async (userData) => {
     const response = await api.post('/auth/register', userData);
     return response.data;
   },
-
-  // Login user
   login: async (credentials) => {
     const response = await api.post('/auth/login', credentials);
     return response.data;
   }
 };
 
-export default api;
-// Add this at the end of api.js
+// Health check (optional)
 export const testAPI = {
-  // Test health endpoint
   getHealth: async () => {
     const response = await api.get('/health');
     return response.data;
   }
 };
+
+export default api;

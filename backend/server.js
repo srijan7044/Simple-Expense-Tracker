@@ -11,8 +11,15 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Middleware: CORS should be set **before** routes
+app.use(cors({
+  origin: [
+    'https://simple-expense-tracker-qvgo.onrender.com',
+    'http://localhost:5173' // your local dev url, if needed
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Routes
