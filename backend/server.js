@@ -13,12 +13,10 @@ const app = express();
 
 // Middleware: CORS should be set **before** routes
 app.use(cors({
-  origin: [
-    'https://simple-expense-tracker-qvgo.onrender.com',
-    'http://localhost:5173' // your local dev url, if needed
-  ],
+  origin: ['https://simple-expense-tracker-qvgo.onrender.com', 'http://localhost:5173'],
   credentials: true
 }));
+
 
 app.use(express.json());
 
